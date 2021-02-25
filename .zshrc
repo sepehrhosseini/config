@@ -8,7 +8,7 @@ export ZSH="/Users/sepehr/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -92,13 +92,21 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 alias v="vim"
 
+# Do it once a day
+autoload -Uz compinit
+if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompdump)  ]; then
+      compinit
+  else
+        compinit -C
+fi
 
 # Compilation flags
 # Install rbenv for this to work
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-eval "$(rbenv init --no-rehash -)"
+eval "$(rbenv init - --no-rehash)"
 
 # Install [Postgres, Sublime] for this to work
-export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+export PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:/Users/sepehr/.rbenv/shims/ruby:$PATH"
 # Install n node manager for this to work
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
