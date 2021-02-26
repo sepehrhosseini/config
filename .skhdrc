@@ -1,0 +1,175 @@
+#  NOTE(koekeishiya): A list of all built-in modifier and literal keywords can
+#                     be found at https://github.com/koekeishiya/skhd/issues/1
+#
+#                     A hotkey is written according to the following rules:
+#
+#                       hotkey       = <mode> '<' <action> | <action>
+#
+#                       mode         = 'name of mode' | <mode> ',' <mode>
+#
+#                       action       = <keysym> '[' <proc_map_lst> ']' | <keysym> '->' '[' <proc_map_lst> ']'
+#                                      <keysym> ':' <command>          | <keysym> '->' ':' <command>
+#                                      <keysym> ';' <mode>             | <keysym> '->' ';' <mode>
+#
+#                       keysym       = <mod> '-' <key> | <key>
+#
+#                       mod          = 'modifier keyword' | <mod> '+' <mod>
+#
+#                       key          = <literal> | <keycode>
+#
+#                       literal      = 'single letter or built-in keyword'
+#
+#                       keycode      = 'apple keyboard kVK_<Key> values (0x3C)'
+#
+#                       proc_map_lst = * <proc_map>
+#
+#                       proc_map     = <string> ':' <command> | <string>     '~' |
+#                                      '*'      ':' <command> | '*'          '~'
+#
+#                       string       = '"' 'sequence of characters' '"'
+#
+#                       command      = command is executed through '$SHELL -c' and
+#                                      follows valid shell syntax. if the $SHELL environment
+#                                      variable is not set, it will default to '/bin/bash'.
+#                                      when bash is used, the ';' delimeter can be specified
+#                                      to chain commands.
+#
+#                                      to allow a command to extend into multiple lines,
+#                                      prepend '\' at the end of the previous line.
+#
+#                                      an EOL character signifies the end of the bind.
+#
+#                       ->           = keypress is not consumed by skhd
+#
+#                       *            = matches every application not specified in <proc_map_lst>
+#
+#                       ~            = application is unbound and keypress is forwarded per usual, when specified in a <proc_map>
+#
+#  NOTE(koekeishiya): A mode is declared according to the following rules:
+#
+#                       mode_decl = '::' <name> '@' ':' <command> | '::' <name> ':' <command> |
+#                                   '::' <name> '@'               | '::' <name>
+#
+#                       name      = desired name for this mode,
+#
+#                       @         = capture keypresses regardless of being bound to an action
+#
+#                       command   = command is executed through '$SHELL -c' and
+#                                   follows valid shell syntax. if the $SHELL environment
+#                                   variable is not set, it will default to '/bin/bash'.
+#                                   when bash is used, the ';' delimeter can be specified
+#                                   to chain commands.
+#
+#                                   to allow a command to extend into multiple lines,
+#                                   prepend '\' at the end of the previous line.
+#
+#                                   an EOL character signifies the end of the bind.
+
+# add an on_enter command to the default mode
+# :: default : chunkc border::color 0xff775759
+#
+# defines a new mode 'test' with an on_enter command, that captures keypresses
+# :: test @ : chunkc border::color 0xff24ccaa
+#
+# from 'default' mode, activate mode 'test'
+# cmd - x ; test
+#
+# from 'test' mode, activate mode 'default'
+# test < cmd - x ; default
+#
+# launch a new terminal instance when in either 'default' or 'test' mode
+# default, test < cmd - return : open -na /Applications/Terminal.app
+
+# application specific bindings
+#
+# cmd - n [
+#     "kitty"       : echo "hello kitty"
+#     *             : echo "hello everyone"
+#     "qutebrowser" : echo "hello qutebrowser"
+#     "terminal"    ~
+#     "finder"      : false
+# 
+#]
+
+# specify a file that should be included as an additional config-file.
+# treated as an absolutepath if the filename begins with '/' otherwise
+# the file is relative to the path of the config-file it was loaded from.
+#
+# .load "/Users/Koe/.config/partial_skhdrc"
+# .load "partial_skhdrc"
+
+# prevent skhd from monitoring events for specific applications.
+#
+# .blacklist [
+#    "kitty"
+#    "terminal"
+#    "qutebrowser"
+# 
+# ]
+
+# open terminal, blazingly fast compared to iTerm/Hyper
+cmd - 0x32 : open -a /Applications/kitty.app/Contents/MacOS/kitty
+
+# open qutebrowser
+#cmd + shift - return : open -a /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+
+# sublime (\ + s)
+cmd + shift - s : open -a /Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text
+
+# spotify
+cmd + shift - o : open -a /Applications/Spotify.app/Contents/MacOS/Spotify
+
+# open mpv
+cmd - m : mpv $(pbpaste)
+
+# toggle float
+alt - t : yabai -m window --toggle float && yabai -m window --grid 4:4:1:1:2:2
+
+# focus window
+ctrl - z : yabai -m window --focus recent
+ctrl - h : yabai -m window --focus west
+ctrl - j : yabai -m window --focus south
+ctrl - k : yabai -m window --focus north
+ctrl - l : yabai -m window --focus east
+ctrl - z : yabai -m window --focus stack.prev
+# ctrl - c : yabai -m window --focus stack.next
+
+# # swap window
+shift + ctrl - x : yabai -m window --swap recent
+shift + ctrl - h : yabai -m window --swap west
+shift + ctrl - j : yabai -m window --swap south
+shift + ctrl - k : yabai -m window --swap north
+shift + ctrl - l : yabai -m window --swap east
+
+# # move window
+shift + cmd - h : yabai -m window --warp west
+shift + cmd - j : yabai -m window --warp south
+shift + cmd - k : yabai -m window --warp north
+shift + cmd - l : yabai -m window --warp east
+
+# swith desktop
+cmd + ctrl - x : yabai -m space --focus recent
+cmd + ctrl - h : yabai -m space --focus prev || skhd -k "ctrl + alt + cmd - z"
+cmd + ctrl - l : yabai -m space --focus next || skhd -k "ctrl + alt + cmd - c"
+cmd + ctrl - 1 : yabai -m space --focus  1 || skhd -k "ctrl + alt + cmd - 1"
+cmd + ctrl - 2 : yabai -m space --focus  2 || skhd -k "ctrl + alt + cmd - 2"
+cmd + ctrl - 3 : yabai -m space --focus  3 || skhd -k "ctrl + alt + cmd - 3"
+cmd + ctrl - 4 : yabai -m space --focus  4 || skhd -k "ctrl + alt + cmd - 4"
+cmd + ctrl - 5 : yabai -m space --focus  5 || skhd -k "ctrl + alt + cmd - 5"
+cmd + ctrl - 6 : yabai -m space --focus  6 || skhd -k "ctrl + alt + cmd - 6"
+cmd + ctrl - 7 : yabai -m space --focus  7 || skhd -k "ctrl + alt + cmd - 7"
+cmd + ctrl - 8 : yabai -m space --focus  8 || skhd -k "ctrl + alt + cmd - 8"
+cmd + ctrl - 9 : yabai -m space --focus  9 || skhd -k "ctrl + alt + cmd - 9"
+cmd + ctrl - 0 : yabai -m space --focus 10 || skhd -k "ctrl + alt + cmd - 0"
+
+# destroy current desktop
+# cmd + alt - w : yabai -m space --destroy
+
+# send window to desktop and follow focus
+shift + cmd - x : yabai -m window --space recent && yabai -m space --focus recent
+shift + cmd - z : yabai -m window --space prev && yabai -m space --focus prev
+shift + cmd - c : yabai -m window --space next && yabai -m space --focus next
+shift + cmd - 1 : yabai -m window --space  1 && yabai -m space --focus 1
+shift + cmd - 2 : yabai -m window --space  2 && yabai -m space --focus 2
+
+

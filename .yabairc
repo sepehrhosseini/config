@@ -1,0 +1,24 @@
+yabai -m config debug_output on
+
+# bsp or float (default: bsp)
+yabai -m config layout bsp
+
+# Override default layout for space 2 only
+# yabai -m config --space 2 layout float
+
+# update bar
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-jsx\"'"
+
+# if using multple displays, add an additional rule for "display_changed" event
+     yabai -m signal --add event=display_changed \
+         action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-jsx\"'
+
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-primary-jsx\"'"
+    yabai -m signal --add event=window_focused \
+        action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-primary-jsx\"'"
+        yabai -m signal --add event=space_changed \
+            action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-secondary-jsx\"'"
+            yabai -m signal --add event=window_focused \
+                action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-secondary-jsx\"'"
