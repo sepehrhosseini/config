@@ -1,0 +1,25 @@
+[user]
+	name = Sepehr Hosseini
+	email = sepehr.hosseini@vineti.com
+
+[core]
+    pager = delta
+
+[delta]
+    #plus-style = "syntax #012800"
+    #minus-style = "syntax #340001"
+    syntax-theme = Dracula
+    navigate = true
+    features = diff-so-fancy side-by-side # line-numbers 
+    line-numbers = true
+    #whitespace-error-style = 22 reverse
+    line-numbers-minus-style = 88
+    line-numbers-plus-style = 120
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold 19 ul "#dddddd"
+    file-decoration-style = none
