@@ -1,0 +1,13 @@
+#
+# Bind keys
+#
+# ctrl + k - go through history
+# ctrl + j - back through history
+#
+#
+
+
+bindkey "^k" history-beginning-search-backward
+bindkey "^j" history-beginning-search-forward
+
+bindkey -s '^s' 'git status --short^M'
