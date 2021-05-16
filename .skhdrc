@@ -123,7 +123,7 @@ cmd + shift - o : open -a /Applications/Spotify.app/Contents/MacOS/Spotify
 cmd + shift - m : mpv $(pbpaste)
 
 # toggle float
-alt - t : yabai -m window --toggle float && yabai -m window --grid 4:4:1:1:2:2
+shift + alt - t : yabai -m window --toggle float && yabai -m window --grid 4:4:1:1:2:2
 
 # focus window
 ctrl + alt - z : yabai -m window --focus recent
@@ -221,23 +221,23 @@ ctrl + alt - k : yabai -m window --insert north
 ctrl + alt - l : yabai -m window --insert east
 
 # rotate tree
-alt - r : yabai -m space --rotate 90
+#alt - r : yabai -m space --rotate 90
 
 # mirror tree y-axis
-alt - y : yabai -m space --mirror y-axis
+#alt - y : yabai -m space --mirror y-axis
 
 # mirror tree x-axis
-alt - x : yabai -m space --mirror x-axis
+#alt - x : yabai -m space --mirror x-axis
 
 # toggle desktop offset
-alt - a : yabai -m space --toggle padding; yabai -m space --toggle gap
+#alt - a : yabai -m space --toggle padding; yabai -m space --toggle gap
 
 # toggle window parent zoom
-alt - d : yabai -m window --toggle zoom-parent
+#alt - d : yabai -m window --toggle zoom-parent
 
 # toggle window fullscreen zoom
-alt - f : yabai -m window --toggle zoom-fullscreen
-shift + alt - f : yabai -m window --toggle zoom-parent
+shift + alt - f : yabai -m window --toggle zoom-fullscreen
+#shift + alt - f : yabai -m window --toggle zoom-parent
 
 # toggle window native fullscreen
 shift + alt - f : yabai -m window --toggle native-fullscreen
@@ -246,18 +246,18 @@ shift + alt - f : yabai -m window --toggle native-fullscreen
 shift + alt - b : yabai -m window --toggle border
 
 # toggle window split type
-alt - e : yabai -m window --toggle split
+#alt - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
-alt - t : yabai -m window --toggle float;\
-          yabai -m window --grid 4:4:1:1:2:2
+#alt - t : yabai -m window --toggle float;\
+#yabai -m window --grid 4:4:1:1:2:2
 
 # toggle sticky
-alt - s : yabai -m window --toggle sticky
+#alt - s : yabai -m window --toggle sticky
 
 # toggle sticky, float and resize to picture-in-picture size
-alt - p : yabai -m window --toggle sticky;\
-          yabai -m window --grid 5:5:4:0:1:1
+#alt - p : yabai -m window --toggle sticky;\
+#          yabai -m window --grid 5:5:4:0:1:1
 
 # change layout of desktop
 ctrl + alt - a : yabai -m space --layout bsp

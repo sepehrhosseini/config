@@ -1,0 +1,28 @@
+# Vim
+alias v=nvim
+alias vconf="v ~/.zshrc ~/.skhdrc ~/.tmux.conf ~/.config/kitty/kitty.conf ~/.aliases ~/.profile ~/.yabairc"
+function vf() {
+  v $(fzf)
+}
+
+# brew
+alias brewre="brew services restart"
+alias brews="brew services start"
+
+# yabai
+alias yab="brewre yabai && sudo yabai --load-sa"
+
+# Spa
+alias ss="spa toggle"
+alias sp="spa pause"
+alias sst="spa search -t"
+alias ssa="spa search -a"
+
+function ssi() {
+  spa name
+  spa artist
+}
+
+# Git
+alias gs="git fuzzy status"
+alias gfp="git fuzzy pr"

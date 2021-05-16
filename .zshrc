@@ -70,7 +70,8 @@ export ZSH="/Users/sepehr/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(ssh-agent git)
+BUNDLED_COMMANDS=(rubocop rspec sidekiq)
+plugins=(ssh-agent git rails bundler)
 source ~/geometry/geometry.zsh
 
 if type brew &>/dev/null; then
@@ -131,16 +132,14 @@ eval "$(rbenv init -)"
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/Users/sepehr/git-fuzzy/bin:$PATH"
 
 source ~/.profile
 source ~/.aliases
-
-#bindkey "^[OA" history-beginning-search-backward
-#bindkey "^[OB" history-beginning-search-forward
+source ~/.bindkeys
 
 GEOMETRY_PROMPT=(geometry_status geometry_path) # redefine left prompt
 GEOMETRY_RPROMPT=(geometry_exec_time)      # append exec_time and pwd right prompt
 GEOMETRY_TITLE=(geometry_node)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="/Users/sepehr/workspace/vineti-platform/git-fuzzy/bin:$PATH"

@@ -1,20 +1,19 @@
-configs=(".tmux.conf" ".zshrc" ".vimrc" ".testing")
-paths=("" "" "" "")
+configs=(".tmux.conf" ".zshrc" ".vimrc" ".yabairc" ".skhdrc" ".profile" ".kitty.conf" ".gitconfig" ".bindkeys" ".aliases")
 
 succeed=()
 failed=()
 
 for i in ${!configs[@]}; do
-	config_path=$HOME/${paths[$i]}${configs[$i]}
+	config_path=$HOME/${configs[$i]}
 	if [[ -f "${config_path}" ]]; then
 		while true; do
-			read -p "${configs[$i]} already exists, do you want to replace it? (y/n) " yn
+			read -p "${config_path} already exists, do you want to replace it? (y/n) " yn
 		    case $yn in
 		        [Nn]* ) 
 					failed+=("${configs[$i]}")
 					break;;
 		        [Yy]* | * )
-					cp ${configs[$i]} ${config_path};
+					cp -f ${configs[$i]} ${config_path};
 					succeed+=("${configs[$i]}")
 					break;;
 		    esac
