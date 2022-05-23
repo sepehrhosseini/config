@@ -1,8 +1,18 @@
+# Common
+alias l="exa -al --git --icons"
+alias fzf='fzf-tmux'
+
+# RSpec
+alias be="bundle exec"
+
 # Vim
 alias v=nvim
 alias vconf="v ~/.zshrc ~/.skhdrc ~/.tmux.conf ~/.config/kitty/kitty.conf ~/.aliases ~/.profile ~/.yabairc"
 function vf() {
   v $(fzf)
+}
+function fz() {
+  $1 $(fzf)
 }
 
 # brew
@@ -10,7 +20,7 @@ alias brewre="brew services restart"
 alias brews="brew services start"
 
 # yabai
-alias yab="brewre yabai && sudo yabai --load-sa"
+alias yab="brew services start koekeishiya/formulae/yabai && sudo yabai --load-sa"
 
 # Spa
 alias ss="spa toggle"
@@ -18,11 +28,20 @@ alias sp="spa pause"
 alias sst="spa search -t"
 alias ssa="spa search -a"
 
-function ssi() {
-  spa name
-  spa artist
-}
-
 # Git
-alias gs="git fuzzy status"
-alias gfp="git fuzzy pr"
+alias gs="git status --short"
+alias gst="git status"
+alias gd="git diff"
+alias gco="git checkout"
+alias gcd="gco develop"
+
+# vineti
+alias cli='cd ~/workspace/vineti-cli'
+alias platform='cd ~/workspace/vineti-platform/platform'
+alias scheduling='cd ~/workspace/scheduling-service/service'
+alias hood='cd ~/workspace/hood-config/config/'
+
+# Heroku
+function hotelenv() {
+  heroku "$@" -a infinite-hotel
+}

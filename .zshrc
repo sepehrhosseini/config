@@ -1,14 +1,18 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+ZSH_DISABLE_COMPFIX=true
+bindkey -s '^s' 'git status --short^M'
+bindkey -s '^ ' ' git status --short^M'
+
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/sepehr/.oh-my-zsh"
+ export ZSH="/Users/sepehr/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
+# ZSH_THEME="Zenburn"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -64,6 +68,14 @@ export ZSH="/Users/sepehr/.oh-my-zsh"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+#
+
+autoload -Uz compinit
+if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompdump)  ]; then
+      compinit
+  else
+        compinit -C
+fi
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -72,33 +84,21 @@ export ZSH="/Users/sepehr/.oh-my-zsh"
 # Add wisely, as too many plugins slow down shell startup.
 BUNDLED_COMMANDS=(rubocop rspec sidekiq)
 plugins=(ssh-agent git rails bundler)
+
+# if type brew &>/dev/null; then
+#   FPATH=/usr/local/share/zsh/site-functions:$FPATH
+# fi
+
 source ~/geometry/geometry.zsh
-
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-
-  autoload -Uz compinit
-  compinit
-fi
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# Do it once a day
-autoload -Uz compinit
-if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompdump)  ]; then
-      compinit
-  else
-        compinit -C
-fi
-
 # Compilation flags
 # Install rbenv for this to work
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-eval "$(rbenv init -)"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -134,12 +134,28 @@ export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PR
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/Users/sepehr/git-fuzzy/bin:$PATH"
 
-source ~/.profile
-source ~/.aliases
-source ~/.bindkeys
 
 GEOMETRY_PROMPT=(geometry_status geometry_path) # redefine left prompt
-GEOMETRY_RPROMPT=(geometry_exec_time)      # append exec_time and pwd right prompt
-GEOMETRY_TITLE=(geometry_node)
+GEOMETRY_RPROMPT=()      # append exec_time and pwd right prompt
+GEOMETRY_TITLE=()
+
+GEOMETRY_STATUS_SYMBOL="▲"             # default prompt symbol
+GEOMETRY_STATUS_SYMBOL_ERROR="△"       # displayed when exit value is != 0
+GEOMETRY_STATUS_COLOR_ERROR="magenta"  # prompt symbol color when exit value is != 0
+GEOMETRY_STATUS_COLOR="default"        # prompt symbol color
+GEOMETRY_PATH_COLOR="#dc7974"        # prompt symbol color
+GEOMETRY_STATUS_COLOR_ROOT="red"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# The next line updates PATH for the Google Cloud SDK.
+# if [ -f '/Users/sepehr/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sepehr/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+# if [ -f '/Users/sepehr/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sepehr/google-cloud-sdk/completion.zsh.inc'; fi
+#
+#
+
+source ~/.aliases
+source ~/.bindkeys

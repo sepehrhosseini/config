@@ -4,6 +4,7 @@
 
 [core]
     pager = delta
+    editor = nvim
 
 [delta]
     #plus-style = "syntax #012800"
@@ -23,3 +24,8 @@
     commit-decoration-style = bold yellow box ul
     file-style = bold 19 ul "#dddddd"
     file-decoration-style = none
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
