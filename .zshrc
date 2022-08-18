@@ -6,7 +6,10 @@ bindkey -s '^ ' ' git status --short^M'
 
 
 # Path to your oh-my-zsh installation.
- export ZSH="/Users/sepehr/.oh-my-zsh"
+export ZSH="/Users/sepehr/.oh-my-zsh"
+
+export EDITOR='/usr/local/bin/lvim'
+export VISUAL='/usr/local/bin/lvim'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -129,6 +132,9 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+eval "$(rbenv init - zsh)"
+
 GEOMETRY_PROMPT=(geometry_status geometry_path) # redefine left prompt
 GEOMETRY_RPROMPT=()      # append exec_time and pwd right prompt
 GEOMETRY_TITLE=()
@@ -153,3 +159,6 @@ GEOMETRY_STATUS_COLOR_ROOT="red"
 
 source ~/.aliases
 source ~/.bindkeys
+
+unfunction work_in_progress
+unset WORDCHARS

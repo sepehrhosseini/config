@@ -8,7 +8,6 @@ set smartcase
 
 set nu
 
-source ~/.config/nvim/plugins/hardcore/hardcore.vim
 
 " Hightlight color
 set cursorcolumn
@@ -113,8 +112,8 @@ Plug 'w0rp/ale'
 " Plug 'drewtempelmeyer/palenight.vim'
 " Plug 'jnurmine/Zenburn'
 " Plug 'ayu-theme/ayu-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 " Plug 'junegunn/seoul256.vim'
 " Plug 'sickill/vim-monokai'
 
@@ -259,6 +258,8 @@ let g:rspec_command = "!bundle exec rspec {spec}"
 
 
 " Bar
+colorscheme material
+let g:airline_theme = 'material'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_section_b = airline#section#create([])

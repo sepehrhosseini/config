@@ -5,7 +5,8 @@ alias l="exa -al --git --icons"
 alias be="bundle exec"
 
 # Vim
-alias v=nvim
+alias lv='~/.local/bin/lvim'
+alias v=lv
 alias vconf="v ~/.zshrc ~/.skhdrc ~/.tmux.conf ~/.config/kitty/kitty.conf ~/.aliases ~/.profile ~/.yabairc"
 function vf() {
   v $(fzf)
