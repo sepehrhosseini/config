@@ -12,7 +12,7 @@ bindkey -s '^ ' ' git status --short^M'
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="Zenburn"
+# ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -122,18 +122,12 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# export PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:/Users/sepehr/.rbenv/shims/ruby:/Users/sepehr/.rbenv/shims:$PATH"
-
 # Source Prezto.
 #if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 #  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 #fi
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
-# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="/Users/sepehr/git-fuzzy/bin:$PATH"
-
 
 GEOMETRY_PROMPT=(geometry_status geometry_path) # redefine left prompt
 GEOMETRY_RPROMPT=()      # append exec_time and pwd right prompt

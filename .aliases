@@ -1,6 +1,5 @@
 # Common
 alias l="exa -al --git --icons"
-alias fzf='fzf-tmux'
 
 # RSpec
 alias be="bundle exec"
@@ -35,13 +34,24 @@ alias gd="git diff"
 alias gco="git checkout"
 alias gcd="gco develop"
 
-# vineti
-alias cli='cd ~/workspace/vineti-cli'
-alias platform='cd ~/workspace/vineti-platform/platform'
-alias scheduling='cd ~/workspace/scheduling-service/service'
-alias hood='cd ~/workspace/hood-config/config/'
+# Project Aliases
+alias api="cd ~/workspace/api_service"
+alias core="cd ~/workspace/core"
+alias auth="cd ~/workspace/auth-service"
+alias customer="cd ~/workspace/customer_web_servise"
+alias web="cd ~/workspace/web_servise"
+alias admin="cd ~/workspace/web_servise/apps/admin"
+alias merchant="cd ~/workspace/web_servise/apps/merchant"
+alias img="cd ~/workspace/img_service"
+alias auth="cd ~/workspace/auth-service"
 
 # Heroku
 function hotelenv() {
   heroku "$@" -a infinite-hotel
 }
+
+# Docker
+alias doc="docker compose -f ./docker/docker-compose.yaml"
+
+# nginx
+alias ngreset="nginx -t && brew services restart nginx"

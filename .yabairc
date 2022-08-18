@@ -7,7 +7,7 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m config mouse_follows_focus          off
 yabai -m config focus_follows_mouse          off
 yabai -m config window_placement             first_child
-yabai -m config window_topmost               on
+yabai -m config window_topmost               off
 yabai -m config window_shadow                on
 yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
@@ -26,7 +26,7 @@ yabai -m config mouse_action2                resize
 yabai -m config mouse_drop_action            swap
 
 # general space settings
-yabai -m config layout                       bsp
+yabai -m config layout                       stack
 yabai -m config top_padding                  0
 yabai -m config bottom_padding               0
 yabai -m config left_padding                 0
@@ -80,6 +80,15 @@ echo "yabai configuration loaded.."
 # yabai -m rule --add app="^Sublime Text$" space=2
  
 # yabai -m rule --add app="^System Preferences$" manage=off
+
+# float system preferences
+yabai -m rule --add app="^System Information$" manage=off
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add title='Preferences$' manage=off
+yabai -m rule --add title='^Archive Utility$' manage=off
+
+# float settings windows
+yabai -m rule --add title='Settings$' manage=off
 
 # # space rules
 # yabai -m config --space 3 layout bspbrew install cmacrae/formulae/spacebar

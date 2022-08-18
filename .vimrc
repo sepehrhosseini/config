@@ -43,7 +43,7 @@ imap kk <esc>
 imap jj <esc>
 nnoremap ,i :source %<CR> :PlugInstall<CR>
 nnoremap ,r :source %<CR>
-nnoremap ,o :vs ~/.vimrc<CR>
+nnoremap ,o :vs ~/.config/nvim/init.vim<CR>
 
 " Indent
 noremap > >>
@@ -262,14 +262,15 @@ let g:rspec_command = "!bundle exec rspec {spec}"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_section_b = airline#section#create([])
+
 let g:tmuxline_powerline_separators = 1
 let g:tmuxline_preset = 'full'
 let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'b'    : '#{b:pane_current_path}',
+      \'a'    : '#I',
+      \'b'    : '',
       \'c'    : '',
-      \'win'  : '#I',
-      \'cwin' : '#I',
+      \'win'  : '#{b:pane_current_path}',
+      \'cwin' : '#{b:pane_current_path}',
       \'x'    : '%a',
       \'y'    : '%R',
       \'z'    : '#(gitmux -cfg /Users/sepehr/.gitmux.conf #{pane_current_path})'}

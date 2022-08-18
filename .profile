@@ -1,14 +1,17 @@
 
-export PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:/Applications/Postgres.app/Contents/Versions/9.6/bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:/Users/sepehr/.rbenv/shims/ruby:/Users/sepehr/.rbenv/shims:/Users/sepehr/n/bin:$PATH"
+export PATH="/Applications/Sublime Merge.app/Contents/SharedSupport/bin:/Applications/Postgres.app/Contents/Versions/9.6/bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:/Users/sepehr/.rbenv/shims/ruby:/Users/sepehr/.rbenv/shims:/Users/sepehr/n/bin:$(brew --prefix openjdk)/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.mix/escripts:$PATH"
+export PATH="/Users/sepehr/git-fuzzy/bin:$PATH"
 
 # Android
-export ANDROID_SDK_ROOT="/Users/sepehr/Library/Android/sdk/"
-export JAVA_HOME="/usr/local/opt/java/"
+unset JAVA_HOME
 export PATH="$ANDROID_SDK_ROOT/tools:$PATH"
 export PATH="$ANDROID_SDK_ROOT/emulator:$PATH"
 export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 
 # source "$HOME/.cargo/env"
 
@@ -33,3 +36,7 @@ export BUNDLE_GEMS__GRAPHQL__PRO="a179ed3d79b:b9361bf36e2"
 
 # Cargo (?)
 # source "$HOME/.cargo/env"
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PYTHON="/opt/homebrew/bin/python3"
