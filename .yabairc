@@ -1,24 +1,24 @@
 #!/usr/bin/env sh
-
-sudo yabai --load-sa
+#
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
 
 # global settings
 yabai -m config mouse_follows_focus          off
 yabai -m config focus_follows_mouse          off
-yabai -m config window_placement             first_child
+yabai -m config window_placement             last_child
 yabai -m config window_topmost               off
-yabai -m config window_shadow                on
-yabai -m config window_opacity               off
-yabai -m config window_opacity_duration      0.0
+yabai -m config window_shadow                off
+yabai -m config window_opacity               on
+yabai -m config window_opacity_duration      0
 yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        0.90
-yabai -m config window_border                off
-yabai -m config window_border_width          6
+yabai -m config normal_window_opacity        1.0
+yabai -m config window_border                on
+yabai -m config window_border_width          10
 yabai -m config active_window_border_color   0xff775759
 yabai -m config normal_window_border_color   0xff555555
 yabai -m config insert_feedback_color        0xffd75f5f
-yabai -m config split_ratio                  0.50
+yabai -m config split_ratio                  0.65
 yabai -m config auto_balance                 off
 yabai -m config mouse_modifier               fn
 yabai -m config mouse_action1                move
@@ -33,69 +33,62 @@ yabai -m config left_padding                 0
 yabai -m config right_padding                0
 yabai -m config window_gap                   0
 
-echo "yabai configuration loaded.."
+# borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0 &
 
-# Borders
-#yabai -m config window_border on
-#yabai -m config window_border_width 12
-#yabai -m config active_window_border_color 0xff775759
-#yabai -m config normal_window_border_color 0xff555555
+# yabai -m rule --add app=".*" sub-layer=normal
 
-#yabai -m window --toggle border
+# # Turn off tiling by default for all apps
+# yabai -m rule --add app=".*" manage=off
 
+# # Turn on tiling for specific apps
+# yabai -m rule --add app="^iTerm2$" manage=on
+# yabai -m rule --add app="^Google Chrome$" manage=on
 
-# global settings
-# yabai -m config mouse_follows_focus          off
-# yabai -m config focus_follows_mouse          autoraise
-# yabai -m config window_placement             second_child
-# yabai -m config window_topmost               off
-
-# yabai -m config window_shadow                on
-# yabai -m config window_border                off
-# yabai -m config window_border_width          6
-
-# yabai -m config normal_window_border_color   0xff282c34
-# yabai -m config insert_feedback_color   0xffe06c75
-
-# yabai -m config window_opacity               off
-# yabai -m config active_window_opacity        1.0
-# yabai -m config normal_window_opacity        0.8
-
-# yabai -m config split_ratio                  0.60
-# yabai -m config auto_balance                 off
-# yabai -m config mouse_modifier               ctrl
-# yabai -m config mouse_action1                move
-# yabai -m config mouse_action2                resize
-
-# # general space settings
-# yabai -m config top_padding                  10
-# yabai -m config bottom_padding               10
-# yabai -m config left_padding                 10
-# yabai -m config right_padding                10
-# yabai -m config window_gap                   10
-
-
-# # window rules
-# # space 1
-# yabai -m rule --add app="^Sublime Text$" space=2
- 
-# yabai -m rule --add app="^System Preferences$" manage=off
-
-# float system preferences
-yabai -m rule --add app="^System Information$" manage=off
-yabai -m rule --add app="^System Preferences$" manage=off
+#float system preferences. Most of these just diable Yabai form resizing them
+yabai -m rule --add app="^About This Mac" manage=off
+yabai -m rule --add app="^Activity Monitor" manage=off
+yabai -m rule --add app="^AlDente" manage=off
+yabai -m rule --add app="^App Store" manage=off
+yabai -m rule --add app="^BreakTimer" manage=off
+yabai -m rule --add app="^Calendar" manage=off
+yabai -m rule --add app="^Calculator" manage=off
+yabai -m rule --add app="^Clock" manage=off
+yabai -m rule --add app="^Contacts" manage=off
+yabai -m rule --add app="^Finder" manage=off
+yabai -m rule --add app="^Hidden Bar" manage=off
+yabai -m rule --add app="^Maps" manage=off
+yabai -m rule --add app="^Messages" manage=off
+yabai -m rule --add app="^Music" manage=off
+yabai -m rule --add app="^Nightfall" manage=off
+yabai -m rule --add app="^TG Pro" manage=off
+yabai -m rule --add app="^Postgres" manage=off
+yabai -m rule --add app="^QuickTime Player" manage=off
+yabai -m rule --add app="^Spotify" manage=off
+yabai -m rule --add app="^SteelSeries ExactMouse Tool" manage=off
+yabai -m rule --add app="^System Settings" manage=off
+yabai -m rule --add app="^TIDAL" manage=off
+yabai -m rule --add app="^WhatsApp" manage=off
+yabai -m rule --add app="^Telegram" manage=off
+yabai -m rule --add app="^Toggl Track" manage=off
+yabai -m rule --add app="^Weather" manage=off
+yabai -m rule --add title='^Toggl Track' manage=off
 yabai -m rule --add title='Preferences$' manage=off
-yabai -m rule --add title='^Archive Utility$' manage=off
-
-# float settings windows
 yabai -m rule --add title='Settings$' manage=off
-
-# # space rules
-# yabai -m config --space 3 layout bspbrew install cmacrae/formulae/spacebar
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 
 
+APPLICATION_NAME="Toggl Track"
+OPACITY_LEVEL=0.5
 
-# signals
-#yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-#yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+# yabai -m rule --add \
+#     app="${APPLICATION_NAME}" \
+#     manage=off \
+#     layer=above \
+#     opacity="${OPACITY_LEVEL}"
 
+yabai -m signal --add event=something
+
+
+
+
+echo "yabai configuration loaded.."

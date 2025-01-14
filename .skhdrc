@@ -120,7 +120,7 @@ cmd - escape : open -a /Applications/kitty.app/Contents/MacOS/kitty
 cmd + shift - s : open -a /Applications/Sublime\ Text.app/Contents/MacOS/Sublime\ Text
 
 # spotify
-cmd + shift - o : open -a /Applications/Spotify.app/Contents/MacOS/Spotify
+# cmd + shift - o : open -a /Applications/Spotify.app/Contents/MacOS/Spotify
 
 # open mpv
 cmd + shift - m : mpv $(pbpaste)
@@ -264,11 +264,13 @@ shift + alt - b : yabai -m window --toggle border
 #yabai -m window --grid 4:4:1:1:2:2
 
 # toggle sticky
-#alt - s : yabai -m window --toggle sticky
+alt - s : yabai -m window --toggle sticky
 
+# in your skhd config:
+# ctrl + cmd - s : yabai -m window $(yabai -m query --windows --window | jq '.id') --toggle sticky
 # toggle sticky, float and resize to picture-in-picture size
-#alt - p : yabai -m window --toggle sticky;\
-#          yabai -m window --grid 5:5:4:0:1:1
+alt - p : yabai -m window --toggle sticky;\
+         yabai -m window --grid 5:5:4:0:1:1
 
 # change layout of desktop
 ctrl + alt - b : yabai -m space --layout bsp
@@ -287,7 +289,7 @@ ctrl + alt - f : yabai -m space --layout float
 # ctrl + cmd - k     : yabai -m window --grid 1:1:0:0:1:1
 
 # make floating window fill left-half of screen
-# ctrl + cmd - h   : yabai -m window --grid 1:2:0:0:1:1
+ctrl + cmd - g   : yabai -m window --grid 1:2:0:0:1:1
 
 # make floating window fill right-half of screen
 # ctrl + cmd - l  : yabai -m window --grid 1:2:1:0:1:1

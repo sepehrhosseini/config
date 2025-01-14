@@ -15,6 +15,13 @@ function fz() {
   $1 $(fzf)
 }
 
+# tmux
+alias t0="tmux a -t0"
+alias t1="tmux a -t1"
+alias t2="tmux a -t2"
+alias t3="tmux a -t3"
+alias t4="tmux a -t4"
+
 # brew
 alias brewre="brew services restart"
 alias brews="brew services start"
@@ -34,25 +41,27 @@ alias gst="git status"
 alias gd="git diff"
 alias gco="git checkout"
 alias gcd="gco develop"
-
-# Project Aliases
-alias api="cd ~/workspace/api_service"
-alias core="cd ~/workspace/core"
-alias auth="cd ~/workspace/auth-service"
-alias customer="cd ~/workspace/customer_web_servise"
-alias web="cd ~/workspace/web_servise"
-alias admin="cd ~/workspace/web_servise/apps/admin"
-alias merchant="cd ~/workspace/web_servise/apps/merchant"
-alias img="cd ~/workspace/img_service"
-alias auth="cd ~/workspace/auth-service"
-
-# Heroku
-function hotelenv() {
-  heroku "$@" -a infinite-hotel
-}
+alias gpf="git push --force"
 
 # Docker
-alias doc="docker compose -f ./docker/docker-compose.yaml"
+alias doc="docker-compose -f ./docker/docker-compose.yaml"
 
 # nginx
 alias ngreset="nginx -t && brew services restart nginx"
+
+# unalias sc
+
+
+# switch profile
+# function toFUP {
+#   /usr/bin/ssh-add -D
+#   /usr/bin/ssh-add --apple-load-keychain ~/.ssh/id_murano
+# }
+# function toTCM {
+#   ssh-add -D
+#   ssh-add ~/.ssh/id_ed25519 --apple-load-keychain
+# }
+
+function runCommand() {
+    for d in ./*/ ; do /bin/zsh -c "(cd "$d" && "$@")"; done
+}

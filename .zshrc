@@ -3,19 +3,21 @@
 ZSH_DISABLE_COMPFIX=true
 bindkey -s '^s' 'git status --short^M'
 bindkey -s '^ ' ' git status --short^M'
+bindkey -r '^d'
 
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/sepehr/.oh-my-zsh"
 
-export EDITOR='/usr/local/bin/lvim'
-export VISUAL='/usr/local/bin/lvim'
+# Already exists in ~/.profile
+# export EDITOR='/usr/local/bin/lvim'
+# export VISUAL='/usr/local/bin/lvim'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="geometry/geometry"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -80,13 +82,15 @@ if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompd
         compinit -C
 fi
 
+zstyle :omz:plugins:ssh-agent identities id_ed25519
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-BUNDLED_COMMANDS=(rubocop rspec sidekiq)
-plugins=(ssh-agent git rails bundler)
+#BUNDLED_COMMANDS=(rubocop rspec sidekiq)
+plugins=(ssh-agent git)
 
 # if type brew &>/dev/null; then
 #   FPATH=/usr/local/share/zsh/site-functions:$FPATH
@@ -101,7 +105,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
 # Install rbenv for this to work
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+#export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -110,7 +114,7 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='lvim'
 # fi
 
 # Compilation flags
@@ -133,10 +137,11 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-eval "$(rbenv init - zsh)"
+#eval "$(rbenv init - zsh)"
 
+GEOMETRY_PROMPT_PLUGINS=(git hg)
 GEOMETRY_PROMPT=(geometry_status geometry_path) # redefine left prompt
-GEOMETRY_RPROMPT=()      # append exec_time and pwd right prompt
+GEOMETRY_RPROMPT=(pwd git)      # append exec_time and pwd right prompt
 GEOMETRY_TITLE=()
 
 GEOMETRY_STATUS_SYMBOL="▲"             # default prompt symbol
@@ -145,6 +150,7 @@ GEOMETRY_STATUS_COLOR_ERROR="magenta"  # prompt symbol color when exit value is 
 GEOMETRY_STATUS_COLOR="default"        # prompt symbol color
 GEOMETRY_PATH_COLOR="#dc7974"        # prompt symbol color
 GEOMETRY_STATUS_COLOR_ROOT="red"
+PROMPT_GEOMETRY_COLORIZE_SYMBOL=true
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -160,5 +166,25 @@ GEOMETRY_STATUS_COLOR_ROOT="red"
 source ~/.aliases
 source ~/.bindkeys
 
+# Firstup
+# Required for yarn/npm to pull private packages.
+# export GITHUB_TOKEN=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
+export GITHUB_TOKEN=d452e7b97e87bcca932774641ed1790921451a46
+
 unfunction work_in_progress
 unset WORDCHARS
+
+# if command -v pyenv 1>/dev/null 2>&1; then
+#  eval "$(pyenv init -)"
+# fi
+#export PYENV_ROOT="$HOME/.pyenv"
+#command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
+
+# pnpm
+export PNPM_HOME="/Users/sepehr/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
