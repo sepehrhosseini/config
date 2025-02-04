@@ -166,11 +166,6 @@ PROMPT_GEOMETRY_COLORIZE_SYMBOL=true
 source ~/.aliases
 source ~/.bindkeys
 
-# Firstup
-# Required for yarn/npm to pull private packages.
-# export GITHUB_TOKEN=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
-export GITHUB_TOKEN=d452e7b97e87bcca932774641ed1790921451a46
-
 unfunction work_in_progress
 unset WORDCHARS
 
